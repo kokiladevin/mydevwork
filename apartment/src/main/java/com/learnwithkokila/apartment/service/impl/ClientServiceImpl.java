@@ -1,7 +1,11 @@
 package com.learnwithkokila.apartment.service.impl;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
+import com.learnwithkokila.apartment.exception.ResourceNotFoundException;
 import com.learnwithkokila.apartment.model.Client;
 import com.learnwithkokila.apartment.repository.ClientRepository;
 import com.learnwithkokila.apartment.service.ClientService;
@@ -20,6 +24,16 @@ public class ClientServiceImpl implements ClientService {
 	public Client saveClient(Client client) {
 		System.out.println(client);
 		return clientRepository.save(client);
+	}
+
+	@Override
+	public List<Client> getAllClients() {
+		return clientRepository.findAll();
+	}
+
+	@Override
+	public Client getClientById(UUID id) {
+		return clientRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Client", "Id", id));
 	}
 
 }

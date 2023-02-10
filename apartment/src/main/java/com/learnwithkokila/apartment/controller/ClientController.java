@@ -1,7 +1,12 @@
 package com.learnwithkokila.apartment.controller;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,4 +33,15 @@ public class ClientController {
 		return new ResponseEntity<Client>(clientService.saveClient(client),HttpStatus.CREATED); 
 	}
 
+	@GetMapping()
+	public List<Client> getAllClients()
+	{
+		return clientService.getAllClients();
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<Client> getClientById(@PathVariable("id") UUID clientId)
+	{
+		return new ResponseEntity<Client>(clientService.getClientById(clientId),HttpStatus.OK);
+	}
 }
