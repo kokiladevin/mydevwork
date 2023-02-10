@@ -10,5 +10,7 @@ public interface ClientService {
 	Client saveClient(Client client);
 	List<Client> getAllClients();
 	Client getClientById(UUID id);
+	Client updateClient(Client client, UUID id);
+	void deleteClient(UUID id);
 
 }

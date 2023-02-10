@@ -36,4 +36,23 @@ public class ClientServiceImpl implements ClientService {
 		return clientRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Client", "Id", id));
 	}
 
+	@Override
+	public Client updateClient(Client client, UUID id) {
+		Client retrievedClient=clientRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Client","id", id));
+		
+		retrievedClient.setEmailId(client.getEmailId());
+		retrievedClient.setFirstName(client.getFirstName());
+		retrievedClient.setLastName(client.getLastName());
+		retrievedClient.setPhoneNumber(client.getPhoneNumber());
+				
+		return clientRepository.save(retrievedClient);
+	}
+
+	@Override
+	public void deleteClient(UUID id) {
+		if(!clientRepository.existsById(id))
+			throw new ResourceNotFoundException("Client","id", id);
+		clientRepository.deleteById(id);
+	}
+
 }
