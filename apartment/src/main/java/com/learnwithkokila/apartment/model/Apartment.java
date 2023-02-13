@@ -7,11 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "apartments")
-public class ClientApartment {
+public class Apartment {
 	
 	@Id
 	@Column(name ="apartmentid")
@@ -33,11 +35,33 @@ public class ClientApartment {
 	@Column(name ="city")
 	private String city;
 	
+	@Column(name ="zipcode")
+	private long zipCode;
+	
+	@Column(name ="isavailable")
+	private boolean availableForRent;
+	
+	@Column(name ="rentprice")
+	private int rentPrice;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "clientid")
+	private Client client;
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 	@Override
 	public String toString() {
 		return "ClientApartment [apartmentId=" + apartmentId + ", description=" + description + ", buildingName="
 				+ buildingName + ", roomNumber=" + roomNumber + ", streetAddress=" + streetAddress + ", city=" + city
-				+ ", zipCode=" + zipCode + ", isAvailableForRent=" + isAvailableForRent + ", rentPrice=" + rentPrice
+				+ ", zipCode=" + zipCode + ", availableForRent=" + availableForRent + ", rentPrice=" + rentPrice
 				+ "]";
 	}
 
@@ -98,11 +122,11 @@ public class ClientApartment {
 	}
 
 	public boolean isAvailableForRent() {
-		return isAvailableForRent;
+		return availableForRent;
 	}
 
-	public void setAvailableForRent(boolean isAvailableForRent) {
-		this.isAvailableForRent = isAvailableForRent;
+	public void setAvailableForRent(boolean availableForRent) {
+		this.availableForRent = availableForRent;
 	}
 
 	public int getRentPrice() {
@@ -113,13 +137,6 @@ public class ClientApartment {
 		this.rentPrice = rentPrice;
 	}
 
-	@Column(name ="zipcode")
-	private long zipCode;
 	
-	@Column(name ="isavailable")
-	private boolean isAvailableForRent;
-	
-	@Column(name ="rentprice")
-	private int rentPrice;
 
 }

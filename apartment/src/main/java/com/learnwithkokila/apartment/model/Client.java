@@ -1,15 +1,11 @@
 package com.learnwithkokila.apartment.model;
 
-import java.util.List;
 import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,22 +29,22 @@ public class Client {
 	@Column(name ="phone", nullable=false)
 	private String phoneNumber;
 	
-	@OneToMany
-    @JoinColumn(name = "clientid")
-    private List<ClientApartment> apartments;
-	
-	
-
-	public List<ClientApartment> getApartments() {
-		return apartments;
-	}
-
-
-	public void setApartments(List<ClientApartment> apartments) {
-		this.apartments = apartments;
-	}
-
-
+//	@OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "clientid")
+//    private List<Apartment> apartments;
+//	
+//	
+//
+//	public List<Apartment> getApartments() {
+//		return apartments;
+//	}
+//
+//
+//	public void setApartments(List<Apartment> apartments) {
+//		this.apartments = apartments;
+//	}
+//
+//
 
 	public UUID getClientId() {
 		return clientId;
@@ -112,7 +108,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client [clientId=" + clientId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId="
-				+ emailId + ", phoneNumber=" + phoneNumber + ", apartments=" + apartments + "]";
+				+ emailId + ", phoneNumber=" + phoneNumber + "]";
 	}
 	
 	

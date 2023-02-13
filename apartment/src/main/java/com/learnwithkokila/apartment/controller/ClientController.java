@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learnwithkokila.apartment.model.Client;
-import com.learnwithkokila.apartment.model.ClientApartment;
-import com.learnwithkokila.apartment.service.ClientApartmentService;
+import com.learnwithkokila.apartment.model.Apartment;
+import com.learnwithkokila.apartment.service.ApartmentService;
 import com.learnwithkokila.apartment.service.ClientService;
 
 @RestController
