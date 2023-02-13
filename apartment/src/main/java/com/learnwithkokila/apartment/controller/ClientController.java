@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learnwithkokila.apartment.model.Client;
+import com.learnwithkokila.apartment.model.ClientApartment;
+import com.learnwithkokila.apartment.service.ClientApartmentService;
 import com.learnwithkokila.apartment.service.ClientService;
 
 @RestController
@@ -22,6 +24,7 @@ import com.learnwithkokila.apartment.service.ClientService;
 public class ClientController {
 	
 	private ClientService clientService;
+	
 
 	public ClientController(ClientService clientService) {
 		super();
@@ -41,6 +44,7 @@ public class ClientController {
 		return clientService.getAllClients();
 	}
 	
+		
 	@GetMapping("{id}")
 	public ResponseEntity<Client> getClientById(@PathVariable("id") UUID clientId)
 	{

@@ -44,7 +44,6 @@ public class Client {
 	}
 
 
-
 	public void setApartments(List<ClientApartment> apartments) {
 		this.apartments = apartments;
 	}
