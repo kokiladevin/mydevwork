@@ -31,8 +31,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 	
 	@Override
 	public Apartment saveApartment(Apartment apartment, UUID clientId) {
-		if(!clientRepository.existsById(clientId))
-			throw new ResourceNotFoundException("Client", "Id", clientId);
+		
+		Client retrievedClient = clientRepository.findById(clientId).orElseThrow(()->new ResourceNotFoundException("Client", "Id", clientId));
+		apartment.setClient(retrievedClient);
 		return apartmentRepository.save(apartment);
 	}
 
@@ -63,6 +64,11 @@ public class ApartmentServiceImpl implements ApartmentService {
 			throw new ResourceNotFoundException("Apartment", "ID", apartmentId);
 		apartmentRepository.deleteById(apartmentId);
 		
+	}
+
+	@Override
+	public List<Apartment> getAllApartments() {
+		return apartmentRepository.findAll();
 	}
 
 	

@@ -6,7 +6,9 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.learnwithkokila.apartment.exception.ResourceNotFoundException;
+import com.learnwithkokila.apartment.model.Apartment;
 import com.learnwithkokila.apartment.model.Client;
+import com.learnwithkokila.apartment.repository.ApartmentRepository;
 import com.learnwithkokila.apartment.repository.ClientRepository;
 import com.learnwithkokila.apartment.service.ClientService;
 
@@ -54,5 +56,6 @@ public class ClientServiceImpl implements ClientService {
 			throw new ResourceNotFoundException("Client","id", id);
 		clientRepository.deleteById(id);
 	}
+
 
 }

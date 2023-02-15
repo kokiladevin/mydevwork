@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,44 +16,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learnwithkokila.apartment.model.Apartment;
 import com.learnwithkokila.apartment.service.ApartmentService;
-import com.learnwithkokila.apartment.service.ClientService;
 
 @RestController
-@RequestMapping("apartmentapi/clients/apartments")
-public class ApartmentController {
+@RequestMapping("/apartmentapi/clients/{id}/apartments")
+public class ClientApartmentController {
 	
 	private ApartmentService apartmentService;
 	
-		
-	public ApartmentController(ApartmentService apartmentService) {
+	public ClientApartmentController(ApartmentService apartmentService) {
 		super();
 		this.apartmentService = apartmentService;
 	}
 
 
 	@GetMapping()
-	public List<Apartment> getAllApartments()
+	public List<Apartment> getAllApartments(@PathVariable("id") UUID clientId)
 	{
-		return apartmentService.getAllApartments();
+		return apartmentService.getAllApartments(clientId);
 	}
 	
-	@GetMapping("{id}")
-	public Apartment getApartment(@PathVariable("id") UUID apartmentId)
+	@GetMapping("{apartmentId}")
+	public Apartment getApartmentById(@PathVariable("apartmentId") UUID apartmentId)
 	{
 		return apartmentService.getApartmentById(apartmentId);
 	}
 	
-	@PutMapping("{id}")
-	public ResponseEntity<Apartment> updateApartment(@PathVariable ("id") UUID apartmentId, @RequestBody Apartment apartment)
+	@PostMapping()
+	public ResponseEntity<Apartment> saveApartment(@RequestBody Apartment apartment, @PathVariable("id") UUID clientId)
+	{
+		System.out.println(apartment);
+		return new ResponseEntity<Apartment>(apartmentService.saveApartment(apartment, clientId),HttpStatus.CREATED);
+	}
+	
+	@PutMapping("{apartmentId}")
+	public ResponseEntity<Apartment> updateApartment(@RequestBody Apartment apartment, @PathVariable("apartmentId") UUID apartmentId)
 	{
 		return new ResponseEntity<Apartment>(apartmentService.updateApartment(apartment, apartmentId),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteApartment(@PathVariable("id") UUID apartmentId)
+	@DeleteMapping("{apartmentId}")
+	public String deleteApartmentById(@PathVariable("apartmentId") UUID apartmentId)
 	{
 		apartmentService.deleteApartment(apartmentId);
-		return new ResponseEntity<String>("Client Deleted Successfully",HttpStatus.OK);
+		return "Apartment deleted successfully";
 	}
+	
+	
 
 }

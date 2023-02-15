@@ -41,10 +41,9 @@ public class Client {
 		return apartments;
 	}
 
-
-	public void setApartments(List<Apartment> apartments) {
-		this.apartments = apartments;
-	}
+//	public void setApartments(List<Apartment> apartments) {
+//		this.apartments = apartments;
+//	}
 
 
 

@@ -44,6 +44,7 @@ public class ClientController {
 		return clientService.getAllClients();
 	}
 	
+	
 		
 	@GetMapping("{id}")
 	public ResponseEntity<Client> getClientById(@PathVariable("id") UUID clientId)
@@ -64,4 +65,5 @@ public class ClientController {
 		clientService.deleteClient(clientId);
 		return new ResponseEntity<String>("Client Deleted Successfully",HttpStatus.OK);
 	}
+	
 }

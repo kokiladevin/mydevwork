@@ -53,9 +53,9 @@ public class Apartment {
 //		return client;
 //	}
 //
-//	public void setClient(Client client) {
-//		this.client = client;
-//	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	@Override
 	public String toString() {
