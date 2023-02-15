@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.learnwithkokila.apartment.model.Client;
 
 public interface ClientRepository extends JpaRepository<Client,UUID> {
-
+	//List<Apartment> findByClientId(UUID ClientId);
 }

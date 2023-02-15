@@ -49,13 +49,13 @@ public class Apartment {
 	@JoinColumn(name = "clientid")
 	private Client client;
 	
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
+//	public Client getClient() {
+//		return client;
+//	}
+//
+//	public void setClient(Client client) {
+//		this.client = client;
+//	}
 
 	@Override
 	public String toString() {
