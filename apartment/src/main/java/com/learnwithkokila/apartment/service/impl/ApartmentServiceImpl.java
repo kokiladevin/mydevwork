@@ -71,5 +71,14 @@ public class ApartmentServiceImpl implements ApartmentService {
 		return apartmentRepository.findAll();
 	}
 
-	
+	@Override
+	public List<Apartment> getAllApartments(int rent) {
+		return apartmentRepository.findAll(rent);
+	}
+
+	@Override
+	public List<Apartment> getAllApartments(int rent, String city) {
+		return apartmentRepository.findAll(rent, city);
+	}
+
 }

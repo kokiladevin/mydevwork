@@ -14,4 +14,6 @@ public interface ApartmentService {
 	Apartment updateApartment(Apartment apartment, UUID id);
 	void deleteApartment(UUID id);
 	List<Apartment> getAllApartments();
+	List<Apartment> getAllApartments(int rent);
+	List<Apartment> getAllApartments(int rent, String city);
 }
