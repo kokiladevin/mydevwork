@@ -1,0 +1,155 @@
+console.log("Welcome");
+var master=["a","a","a","a"];
+generateMaster();
+setText("Input","");
+
+
+var attempt=1;
+var id;
+var clrpos="Color   Pos\n";
+function getInput(atmpt)
+{
+  var id="canvas"+atmpt;
+  
+  
+  createCanvas(id);
+  setFillColor("yellow");
+  circle(20, 400,10);
+ 
+}
+function findFillColor(colorChar)
+{
+   var fillingColor;
+  if(colorChar=="R")
+      fillingColor="Red";
+    else if(colorChar=="G")
+      fillingColor="Green";
+    else if(colorChar=="W")
+      fillingColor="White";
+    else if(colorChar=="Y")
+      fillingColor="Yellow";
+    else if(colorChar=="P")
+      fillingColor="Purple";
+    else 
+      fillingColor="Blue";
+    return fillingColor;
+}
+
+function drawCircle(input)
+{
+  id="Canvas"+attempt;
+  var filling;
+  var circlePositionX=20;
+  var circlePositionY=150+(attempt*25);
+  createCanvas(id);
+  for(var i=0;i<4;i++)
+  {
+    filling = findFillColor(input[i]);
+    setFillColor(filling);
+    circle(circlePositionX,circlePositionY,10);
+    circlePositionX=circlePositionX+30;
+  }
+}
+
+  onEvent("Confirm", "click", function( ) {
+  var inputColors = getText("Input");
+  var color=["a","a","a","a"];
+  color[0]=inputColors.substring(0,1);
+  color[1]=inputColors.substring(1,2);
+  color[2]=inputColors.substring(2,3);
+  color[3]=inputColors.substring(3,4);
+  console.log(color);
+  drawCircle(color);
+  attempt++;
+  checkInput(color);
+  });
+  
+  function checkInput(userInput)
+  {
+    var pos=0;
+    var colorChoice=0;
+    for(var k=0;k<4;k++)
+    {
+      if(master[k]==userInput[k])
+      {
+        colorChoice++;
+        pos++;
+        userInput[k]="k";
+      }
+    }
+    
+    for(var i=0;i<4;i++)
+    {
+      for(var j=0;j<4;j++)
+      {
+        if(master[i]== userInput[j] && (i==j))
+        {  
+          colorChoice++;
+          pos++;
+          userInput[j]="k";
+        //  console.log(colorChoice+"--"+pos+"--"+userInput);
+          break;
+        }
+        else if(master[i]== userInput[j])
+        {
+          colorChoice++;
+          userInput[j]="k";
+        //  console.log(colorChoice+"--"+pos+"--"+userInput);
+          break;
+          
+        }
+       
+      }
+    }
+    
+    drawClues(colorChoice,pos);
+   
+    if (colorChoice==4 && pos==4)
+    {
+      setText("Winning","You Won!!");
+      hideElement("Confirm");
+    }
+    else
+      setText("Input","");
+  }
+   
+  
+function drawClues(whole,black)
+{
+  var positionX=180;
+  createCanvas(id+"clues");
+  setFillColor("black");
+  for(i=0;i<black;i++)
+  {
+    circle(positionX,125+(attempt*25),5);
+    positionX=positionX+15;
+  }
+  setFillColor("White");
+  for(i=0;i<(whole-black);i++)
+  {
+    circle(positionX,125+(attempt*25),5);
+    positionX=positionX+15;
+  }
+}
+function generateMaster()
+{
+for(var i=0;i<4;i++)
+{
+  var code=randomNumber(1,6);
+  if(code==1)
+    master[i]="R";
+  else if(code==2)
+    master[i]="G";
+  else if(code==3)
+    master[i]="W";
+  else if(code==4)
+    master[i]="Y";
+  else if(code==5)
+    master[i]="P";
+  else 
+    master[i]="B";
+}
+
+
+console.log(master);
+}
